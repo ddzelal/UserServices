@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace UserRepository.Models;
-
-public record RegisterInputType(
+namespace UserRepository.Dto;
+public record AuthenticationResult(
+    int Id,
     string FirstName,
     string LastName,
-    string Email,
-    string Password
+    string Email
+
 );

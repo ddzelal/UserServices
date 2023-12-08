@@ -2,13 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using UserRepository.Data;
 using UserRepository.Interfaces;
 using UserRepository.Models;
 
+
 namespace UserRepository.Repository
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : IUserRepository, IAsyncDisposable
     {
         private readonly DataContext _context;
         public UserRepository(DataContext context)
@@ -16,39 +18,21 @@ namespace UserRepository.Repository
             _context = context;
 
         }
-        public bool CreateUser(User user)
+
+        public async Task Add(User user)
         {
-            _context.Add(user);
-            return Save();
+            await _context.User.AddAsync(user);
+            await _context.SaveChangesAsync();
         }
 
-        public User GetUserById(int userId)
+        public ValueTask DisposeAsync()
         {
-            return _context.User.Where(u => u.Id == userId).FirstOrDefault();
+            return _context.DisposeAsync();
         }
 
-        public bool IsUserExist(string email)
+        public async Task<User?> GetByEmail(string email)
         {
-            return _context.User.Any(u => u.Email == email);
-
-        }
-
-        public bool IsUserVerified(int userId)
-        {
-            var user = _context.User.FirstOrDefault(u => u.Id == userId);
-            return user != null && user.IsVerified;
-        }
-
-        public bool Save()
-        {
-            var saved = _context.SaveChanges();
-            return saved > 0 ? true : false;
-        }
-
-        public bool UpdateUser(User user)
-        {
-            _context.Update(user);
-            return Save();
+            return await _context.User.FirstOrDefaultAsync(u => u.Email == email);
         }
     }
 }

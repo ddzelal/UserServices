@@ -5,22 +5,30 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using UserRepository.Dto;
 using UserRepository.Interfaces;
+using UserRepository.Models;
 
 namespace UserRepository.Controllers
 {
     [Route("[controller]")]
     public class AuthController : Controller
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IAuthenticationService _authenticationService;
 
-        public AuthController(IUserRepository userRepository)
+        public AuthController(IAuthenticationService authenticationService)
         {
-            _userRepository = userRepository;
+            _authenticationService = authenticationService;
         }
 
-        [HttpPost]
-        public IActionResult Register([FromBody])
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterInputType request)
+        {
+            RegisterCommand command = new(request.FirstName, request.LastName, request.Email, request.Password);
 
+            await _authenticationService.Register(command);
+
+            return Ok("Successfully register!");
+        }
     }
 }
