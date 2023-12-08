@@ -8,15 +8,8 @@ namespace UserRepository.Interfaces
 {
     public interface IUserRepository
     {
-        // bool IsUserExist(string email);
-        // bool IsUserVerified(int userId);
-        // User GetUserById(int userId);
-        // bool CreateUser(User user);
-        // bool UpdateUser(User user);
-        // bool Save();
         public Task<User?> GetByEmail(string email);
         public Task Add(User user);
-
 
     }
 }

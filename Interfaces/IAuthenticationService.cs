@@ -8,7 +8,7 @@ namespace UserRepository.Interfaces
 {
     public interface IAuthenticationService
     {
-        // public Task<AuthenticationResult> Login(LoginQuery query);
+        public Task<AuthenticationResult> Login(LoginQuery query);
         public Task<AuthenticationResult> Register(RegisterCommand command);
     }
 }

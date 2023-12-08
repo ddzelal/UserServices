@@ -30,5 +30,15 @@ namespace UserRepository.Controllers
 
             return Ok("Successfully register!");
         }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequest request)
+        {
+            LoginQuery loginQuery = new(request.Email, request.Password);
+
+            AuthenticationResult result = await _authenticationService.Login(loginQuery);
+
+            return Ok(result);
+        }
     }
 }
