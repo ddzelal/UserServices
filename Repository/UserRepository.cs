@@ -18,7 +18,8 @@ namespace UserRepository.Repository
         }
         public bool CreateUser(User user)
         {
-            throw new NotImplementedException();
+            _context.Add(user);
+            return Save();
         }
 
         public User GetUserById(int userId)
@@ -34,17 +35,20 @@ namespace UserRepository.Repository
 
         public bool IsUserVerified(int userId)
         {
-            throw new NotImplementedException();
+            var user = _context.User.FirstOrDefault(u => u.Id == userId);
+            return user != null && user.IsVerified;
         }
 
         public bool Save()
         {
-            throw new NotImplementedException();
+            var saved = _context.SaveChanges();
+            return saved > 0 ? true : false;
         }
 
         public bool UpdateUser(User user)
         {
-            throw new NotImplementedException();
+            _context.Update(user);
+            return Save();
         }
     }
 }
