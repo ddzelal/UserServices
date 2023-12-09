@@ -11,7 +11,8 @@ using UserRepository.Models;
 
 namespace UserRepository.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
+    [ApiController]
     public class AuthController : Controller
     {
         private readonly IAuthenticationService _authenticationService;
@@ -42,13 +43,21 @@ namespace UserRepository.Controllers
         }
 
         [HttpPost("verify")]
-        public async Task<IActionResult> Verfy([FromQuery] VerifyQuery request)
+        public async Task Verfy([FromQuery] VerifyQuery request)
         {
             VerifyQuery verifyQuery = new(request.Email, request.VerificationCode);
 
             await _authenticationService.VerifyAccount(verifyQuery.Email, verifyQuery.VerificationCode);
 
-            return Ok("User successfully verified!");
+            Ok("User successfully verified!");
+        }
+
+        [HttpPost("reset-verification-code/{email}")]
+        public async Task ResetVerificationCode([FromBody] string email)
+        {
+            await _authenticationService.ResetVerificationCode(email);
+
+            Ok("Successfully reset code!");
         }
     }
 }

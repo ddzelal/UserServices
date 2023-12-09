@@ -79,6 +79,28 @@ namespace UserRepository.Services
             );
         }
 
+        public async Task<AuthenticationResult> ResetVerificationCode(string email)
+        {
+            var user = await _userRepository.GetByEmail(email);
+
+            if (user == null)
+            {
+                throw new NoUserFoundException("User not found");
+            }
+            var verificationCode = _codeGenerator.GenerateVerificationCode();
+            user.VerificationCode = verificationCode;
+            _emailService.SendVerificationCode(email, verificationCode);
+            await _userRepository.Update(user);
+
+            return new AuthenticationResult(
+                        user.Id,
+                        user.FirstName,
+                        user.LastName,
+                        user.Email
+                    );
+
+        }
+
         public async Task<AuthenticationResult> VerifyAccount(string email, string verificationCode)
         {
             var user = await _userRepository.GetByEmail(email);
