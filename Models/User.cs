@@ -14,6 +14,7 @@ namespace UserRepository.Models
         public string Password { get; set; } = string.Empty;
         public bool IsVerified { get; set; } = false;
         public string? VerificationCode { get; set; }
+        public string? ResetPasswordCode { get; set; }
 
     }
 }

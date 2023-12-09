@@ -53,11 +53,19 @@ namespace UserRepository.Controllers
         }
 
         [HttpPost("reset-verification-code/{email}")]
-        public async Task ResetVerificationCode([FromBody] string email)
+        public async Task ResetVerificationCode([FromBody] string Email)
         {
-            await _authenticationService.ResetVerificationCode(email);
+            await _authenticationService.ResetVerificationCode(Email);
 
             Ok("Successfully reset code!");
+        }
+
+        [HttpPost("forgot-password-code/{email}")]
+        public async Task ForgotPasswordSendCode([FromQuery] string email)
+        {
+            await _authenticationService.ForgotPasswordSendCode(email);
+
+            Ok("Successfully send reset code!");
         }
     }
 }

@@ -10,7 +10,8 @@ namespace UserRepository.Interfaces
     {
         public Task<AuthenticationResult> Login(LoginQuery query);
         public Task<AuthenticationResult> Register(RegisterCommand command);
-        public Task<AuthenticationResult> VerifyAccount(string email, string verificationCode);
-        public Task<AuthenticationResult> ResetVerificationCode(string email);
+        public Task VerifyAccount(string email, string verificationCode);
+        public Task ResetVerificationCode(string email);
+        public Task ForgotPasswordSendCode(string email);
     }
 }

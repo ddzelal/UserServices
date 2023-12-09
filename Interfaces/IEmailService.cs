@@ -9,5 +9,6 @@ namespace UserRepository.Interfaces
     {
         void Send(string to, string subject, string html, string from = null);
         public void SendVerificationCode(string to, string verificationCode);
+        public void SendResetCode(string to, string verificationCode);
     }
 }

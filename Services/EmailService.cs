@@ -38,6 +38,13 @@ namespace UserRepository.Services
             smtp.Disconnect(true);
         }
 
+        public void SendResetCode(string to, string resetPasswordCode)
+        {
+            string subject = "Reset password Code";
+            string htmlBody = $"Your  code is: {resetPasswordCode}";
+            Send(to, subject, htmlBody);
+        }
+
         public void SendVerificationCode(string to, string verificationCode)
         {
             string subject = "Verification Code";

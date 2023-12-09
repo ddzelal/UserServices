@@ -4,12 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-public record LoginRequest(
+namespace UserRepository.Dto;
+
+public record ForgotPasswordRequest(
 
     [Required]
     [EmailAddress]
-    string Email,
-
-    [Required]
-    string Password
+    string Email
 );

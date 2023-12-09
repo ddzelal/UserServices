@@ -8,5 +8,6 @@ namespace UserRepository.Interfaces
     public interface ICodeGenerator
     {
         string GenerateVerificationCode();
+        string GenerateResetPasswordCode();
     }
 }

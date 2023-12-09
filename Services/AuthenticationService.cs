@@ -24,6 +24,23 @@ namespace UserRepository.Services
 
         }
 
+        public async Task ForgotPasswordSendCode(string email)
+        {
+            var user = await _userRepository.GetByEmail(email);
+
+            if (user == null)
+            {
+                throw new NoUserFoundException("User not found");
+            }
+            var resetPasswordCode = _codeGenerator.GenerateResetPasswordCode();
+            user.ResetPasswordCode = resetPasswordCode;
+
+            _emailService.SendResetCode(email, resetPasswordCode);
+
+            await _userRepository.Update(user);
+
+        }
+
         public async Task<AuthenticationResult> Login(LoginQuery query)
         {
             if (await _userRepository.GetByEmail(query.Email) is not User user)
@@ -79,7 +96,7 @@ namespace UserRepository.Services
             );
         }
 
-        public async Task<AuthenticationResult> ResetVerificationCode(string email)
+        public async Task ResetVerificationCode(string email)
         {
             var user = await _userRepository.GetByEmail(email);
 
@@ -92,16 +109,9 @@ namespace UserRepository.Services
             _emailService.SendVerificationCode(email, verificationCode);
             await _userRepository.Update(user);
 
-            return new AuthenticationResult(
-                        user.Id,
-                        user.FirstName,
-                        user.LastName,
-                        user.Email
-                    );
-
         }
 
-        public async Task<AuthenticationResult> VerifyAccount(string email, string verificationCode)
+        public async Task VerifyAccount(string email, string verificationCode)
         {
             var user = await _userRepository.GetByEmail(email);
 
@@ -115,13 +125,6 @@ namespace UserRepository.Services
             user.IsVerified = true;
 
             await _userRepository.Update(user);
-
-            return new AuthenticationResult(
-              user.Id,
-              user.FirstName,
-              user.LastName,
-              user.Email
-          );
         }
     }
 }
