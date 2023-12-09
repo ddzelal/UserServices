@@ -28,7 +28,7 @@ namespace UserRepository.Controllers
 
             await _authenticationService.Register(command);
 
-            return Ok("Successfully register!");
+            return Ok("Successfully register. We are send verification code in your mail, plase verified!");
         }
 
         [HttpPost("login")]
@@ -39,6 +39,16 @@ namespace UserRepository.Controllers
             AuthenticationResult result = await _authenticationService.Login(loginQuery);
 
             return Ok(result);
+        }
+
+        [HttpPost("verify")]
+        public async Task<IActionResult> Verfy([FromQuery] VerifyQuery request)
+        {
+            VerifyQuery verifyQuery = new(request.Email, request.VerificationCode);
+
+            await _authenticationService.VerifyAccount(verifyQuery.Email, verifyQuery.VerificationCode);
+
+            return Ok("User successfully verified!");
         }
     }
 }

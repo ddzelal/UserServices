@@ -13,8 +13,12 @@ namespace UserRepository.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IPasswordHasher _passwordHasher;
-        public AuthenticationService(IUserRepository userRepository, IPasswordHasher passwordHasher)
+        private readonly ICodeGenerator _codeGenerator;
+        private readonly IEmailService _emailService;
+        public AuthenticationService(IUserRepository userRepository, IPasswordHasher passwordHasher, ICodeGenerator codeGenerator, IEmailService emailService)
         {
+            _emailService = emailService;
+            _codeGenerator = codeGenerator;
             _userRepository = userRepository;
             _passwordHasher = passwordHasher;
 
@@ -34,6 +38,7 @@ namespace UserRepository.Services
             {
                 throw new BadRequestException("Wrong password or email.");
             }
+
             return new AuthenticationResult(
                 user.Id,
                 user.FirstName,
@@ -56,10 +61,15 @@ namespace UserRepository.Services
                 FirstName = command.FirstName,
                 LastName = command.LastName,
                 Email = command.Email,
-                Password = passwordHash
+                Password = passwordHash,
+                VerificationCode = _codeGenerator.GenerateVerificationCode()
+
             };
 
+            _emailService.SendVerificationCode(user.Email, user.VerificationCode);
+
             await _userRepository.Add(user);
+
 
             return new AuthenticationResult(
                 user.Id,
@@ -67,6 +77,29 @@ namespace UserRepository.Services
                 user.LastName,
                 user.Email
             );
+        }
+
+        public async Task<AuthenticationResult> VerifyAccount(string email, string verificationCode)
+        {
+            var user = await _userRepository.GetByEmail(email);
+
+            if (user == null)
+            {
+                throw new NoUserFoundException("User not found");
+            }
+
+            if (user.VerificationCode != verificationCode) throw new BadRequestException("Invalid verification code");
+
+            user.IsVerified = true;
+
+            await _userRepository.Update(user);
+
+            return new AuthenticationResult(
+              user.Id,
+              user.FirstName,
+              user.LastName,
+              user.Email
+          );
         }
     }
 }

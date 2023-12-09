@@ -7,6 +7,6 @@ namespace UserRepository.Interfaces
 {
     public interface ICodeGenerator
     {
-        int GenerateVerificationCode();
+        string GenerateVerificationCode();
     }
 }

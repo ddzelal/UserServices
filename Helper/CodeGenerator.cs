@@ -8,10 +8,10 @@ namespace UserRepository.Helper
 {
     public class CodeGenerator : ICodeGenerator
     {
-        public int GenerateVerificationCode()
+        public string GenerateVerificationCode()
         {
             Random random = new Random();
-            return random.Next(100000, 999999);
+            return random.Next(100000, 999999).ToString();
         }
     }
 }

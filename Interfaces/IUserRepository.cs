@@ -10,6 +10,7 @@ namespace UserRepository.Interfaces
     {
         public Task<User?> GetByEmail(string email);
         public Task Add(User user);
+        Task Update(User user);
 
     }
 }
