@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using UserRepository.Dto;
@@ -21,7 +22,6 @@ namespace UserRepository.Controllers
         {
             _authenticationService = authenticationService;
         }
-
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterInputType request)
         {
@@ -74,6 +74,15 @@ namespace UserRepository.Controllers
         {
             Console.WriteLine(resetPasswordQuery);
             await _authenticationService.ResetPassword(resetPasswordQuery.Email, resetPasswordQuery.NewPassword, resetPasswordQuery.ConfirmNewPassword, resetPasswordQuery.ResetCode);
+
+            Ok("Successfully reset password!");
+        }
+
+
+        [Authorize]
+        [HttpGet("getMe")]
+        public async Task GetMe()
+        {
 
             Ok("Successfully reset password!");
         }

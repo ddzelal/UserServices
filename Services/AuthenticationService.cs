@@ -15,12 +15,16 @@ namespace UserRepository.Services
         private readonly IPasswordHasher _passwordHasher;
         private readonly ICodeGenerator _codeGenerator;
         private readonly IEmailService _emailService;
-        public AuthenticationService(IUserRepository userRepository, IPasswordHasher passwordHasher, ICodeGenerator codeGenerator, IEmailService emailService)
+        private readonly IJwtTokenGenerator _jwtTokenGenerator;
+        public AuthenticationService(IUserRepository userRepository, IPasswordHasher passwordHasher, ICodeGenerator codeGenerator, IEmailService emailService, IJwtTokenGenerator jwtTokenGenerator)
         {
+
+            _jwtTokenGenerator = jwtTokenGenerator;
             _emailService = emailService;
             _codeGenerator = codeGenerator;
             _userRepository = userRepository;
             _passwordHasher = passwordHasher;
+
 
         }
 
@@ -61,7 +65,8 @@ namespace UserRepository.Services
                 user.Id,
                 user.FirstName,
                 user.LastName,
-                user.Email
+                user.Email,
+                _jwtTokenGenerator.GenerateToken(user)
             );
         }
 
@@ -93,7 +98,9 @@ namespace UserRepository.Services
                 user.Id,
                 user.FirstName,
                 user.LastName,
-                user.Email
+                user.Email,
+                _jwtTokenGenerator.GenerateToken(user)
+
             );
         }
 
