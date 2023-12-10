@@ -42,7 +42,7 @@ namespace UserRepository.Controllers
             return Ok(result);
         }
 
-        [HttpPost("verify")]
+        [HttpPatch("verify")]
         public async Task Verfy([FromQuery] VerifyQuery request)
         {
             VerifyQuery verifyQuery = new(request.Email, request.VerificationCode);
@@ -52,20 +52,30 @@ namespace UserRepository.Controllers
             Ok("User successfully verified!");
         }
 
-        [HttpPost("reset-verification-code/{email}")]
-        public async Task ResetVerificationCode([FromBody] string Email)
+        [HttpPatch("reset-verification-code/{email}")]
+        public async Task ResetVerificationCode(string Email)
         {
             await _authenticationService.ResetVerificationCode(Email);
 
             Ok("Successfully reset code!");
         }
 
-        [HttpPost("forgot-password-code/{email}")]
-        public async Task ForgotPasswordSendCode([FromQuery] string email)
+        [HttpPatch("forgot-password-code/{email}")]
+        public async Task ForgotPasswordSendCode(string email)
         {
             await _authenticationService.ForgotPasswordSendCode(email);
 
             Ok("Successfully send reset code!");
+        }
+
+
+        [HttpPut("reset-password")]
+        public async Task ResetPassword([FromBody] ResetPasswordQuery resetPasswordQuery)
+        {
+            Console.WriteLine(resetPasswordQuery);
+            await _authenticationService.ResetPassword(resetPasswordQuery.Email, resetPasswordQuery.NewPassword, resetPasswordQuery.ConfirmNewPassword, resetPasswordQuery.ResetCode);
+
+            Ok("Successfully reset password!");
         }
     }
 }

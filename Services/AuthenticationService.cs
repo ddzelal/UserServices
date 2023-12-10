@@ -26,6 +26,7 @@ namespace UserRepository.Services
 
         public async Task ForgotPasswordSendCode(string email)
         {
+            Console.WriteLine(email);
             var user = await _userRepository.GetByEmail(email);
 
             if (user == null)
@@ -94,6 +95,28 @@ namespace UserRepository.Services
                 user.LastName,
                 user.Email
             );
+        }
+
+        public async Task ResetPassword(string email, string newPassword, string confirmNewPassword, string resetCode)
+        {
+            var user = await _userRepository.GetByEmail(email);
+
+            if (user == null)
+            {
+                throw new NoUserFoundException("User not found");
+            }
+            if (newPassword != confirmNewPassword)
+            {
+                throw new BadRequestException("Passwords do not match. Please make sure your password and confirmation match.");
+            }
+            if (user.ResetPasswordCode != resetCode)
+            {
+                throw new BadRequestException("Invalid code");
+            }
+            user.Password = _passwordHasher.HashPassword(newPassword);
+            user.ResetPasswordCode = null;
+
+            await _userRepository.Update(user);
         }
 
         public async Task ResetVerificationCode(string email)
