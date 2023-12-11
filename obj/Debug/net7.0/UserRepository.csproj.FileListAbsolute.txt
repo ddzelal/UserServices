@@ -79,3 +79,4 @@
 /home/dzelal/Desktop/dzelal-public/c-sharp-practice/UserRepository/UserRepository/bin/Debug/net7.0/MimeKit.dll
 /home/dzelal/Desktop/dzelal-public/c-sharp-practice/UserRepository/UserRepository/bin/Debug/net7.0/System.Security.Cryptography.Pkcs.dll
 /home/dzelal/Desktop/dzelal-public/c-sharp-practice/UserRepository/UserRepository/bin/Debug/net7.0/runtimes/win/lib/net7.0/System.Security.Cryptography.Pkcs.dll
+/home/dzelal/Desktop/dzelal-public/c-sharp-practice/UserRepository/UserRepository/bin/Debug/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll

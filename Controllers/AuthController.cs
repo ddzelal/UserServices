@@ -78,7 +78,6 @@ namespace UserRepository.Controllers
             Ok("Successfully reset password!");
         }
 
-
         [Authorize]
         [HttpGet("getMe")]
         public async Task GetMe()
