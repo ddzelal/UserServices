@@ -3,13 +3,12 @@ using UserRepository.Data;
 using UserRepository.Helper;
 using UserRepository.Interfaces;
 using UserRepository.Services;
-using UserRepository.Repository;
 using UserRepository.Middlewares;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +17,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, SwaggerGetOptionConfiguration>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<IUserRepository, UserRepository.Repository.UserRepository>();
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();

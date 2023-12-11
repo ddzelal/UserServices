@@ -5,13 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.Swagger;
 
 
 namespace UserRepository.Helper
 {
-    public static class SwaggerGetOptionConfiguration
+    public class SwaggerGetOptionConfiguration : IConfigureOptions<SwaggerGenOptions>
     {
-        public static void ConfigureAuth(this SwaggerGenOptions options)
+
+        public void Configure(SwaggerGenOptions options)
         {
             options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
             {
