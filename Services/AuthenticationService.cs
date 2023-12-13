@@ -85,7 +85,7 @@ namespace UserRepository.Services
                 LastName = command.LastName,
                 Email = command.Email,
                 Password = passwordHash,
-                VerificationCode = _codeGenerator.GenerateVerificationCode()
+                VerificationCode = _codeGenerator.GenerateVerificationCode(),
 
             };
 
