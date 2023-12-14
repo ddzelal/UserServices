@@ -16,6 +16,7 @@ namespace UserRepository.Models
         public string? VerificationCode { get; set; }
         public string? ResetPasswordCode { get; set; }
         public Role Role { get; set; } = Role.BasicUser;
+        public ICollection<Post> Post { get; set; } = new List<Post>();
 
     }
 }
