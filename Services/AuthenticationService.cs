@@ -30,7 +30,6 @@ namespace UserRepository.Services
 
         public async Task ForgotPasswordSendCode(string email)
         {
-            Console.WriteLine(email);
             var user = await _userRepository.GetByEmail(email);
 
             if (user == null)

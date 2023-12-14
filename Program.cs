@@ -9,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using UserRepository.Repository;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,8 +19,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, SwaggerGetOptionConfiguration>();
+builder.Services.AddScoped<IGetClaim, GetClaim>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<IUserRepository, UserRepository.Repository.UserRepository>();
+builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddScoped<ICodeGenerator, CodeGenerator>();
@@ -27,6 +31,9 @@ builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.Configure<HashSettings>(builder.Configuration.GetSection(HashSettings.SectionName));
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection(EmailSettings.SectionName));
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection(JwtSettings.SectionName));
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped(provider => provider.GetRequiredService<IHttpContextAccessor>().HttpContext.User);
+
 
 var jwtSettingsData = new JwtSettings();
 builder.Configuration.Bind(JwtSettings.SectionName, jwtSettingsData);
