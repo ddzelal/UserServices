@@ -47,9 +47,9 @@ namespace UserRepository.Controllers
         }
 
         [HttpPatch("reset-verification-code/{email}")]
-        public async Task ResetVerificationCode(string Email)
+        public async Task ResetVerificationCode(string email)
         {
-            await _authenticationService.ResetVerificationCode(Email);
+            await _authenticationService.ResetVerificationCode(email);
 
             Ok("Successfully reset code!");
         }

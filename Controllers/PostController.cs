@@ -29,5 +29,15 @@ namespace UserRepository.Controllers
             return Ok("Successfully created post!");
         }
 
+        [Authorize]
+        [HttpDelete("delete/{postId}")]
+        public async Task<IActionResult> Delete(int postId)
+        {
+            await _postService.DelatePost(postId);
+
+            return Ok("Successfully deleted post!");
+        }
+
+
     }
 }

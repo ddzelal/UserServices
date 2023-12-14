@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using UserRepository.Dto;
+using UserRepository.Errors;
 using UserRepository.Interfaces;
 using UserRepository.Models;
 
@@ -30,6 +31,18 @@ namespace UserRepository.Services
             };
 
             await _postRepository.Add(post);
+        }
+
+
+        public async Task DelatePost(int postId)
+        {
+            int authorId = _getClaim.GetUserIdFromClaims(_claims);
+            var post = await _postRepository.GetPostById(postId);
+
+            if (post is null) throw new NotFoundRequestException("Not found post");
+            if (post.AuthorId != authorId) throw new BadRequestException("You must be creator of post!");
+
+            await _postRepository.DeletePost(post.Id, authorId);
         }
     }
 }

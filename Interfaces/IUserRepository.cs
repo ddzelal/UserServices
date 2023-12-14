@@ -9,6 +9,7 @@ namespace UserRepository.Interfaces
     public interface IUserRepository
     {
         public Task<User?> GetByEmail(string email);
+        public Task<User?> GetUserById(int userId);
         public Task Add(User user);
         Task Update(User user);
 

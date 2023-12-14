@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using UserRepository.Data;
 using UserRepository.Interfaces;
 using UserRepository.Models;
@@ -23,10 +24,22 @@ namespace UserRepository.Repository
             await _context.SaveChangesAsync();
         }
 
+        public async Task DeletePost(int postId, int authorId)
+        {
+            var post = await _context.Post.FirstOrDefaultAsync(p => p.Id == postId && p.AuthorId == authorId);
+            _context.Remove(post);
+            await _context.SaveChangesAsync();
+        }
+
         public ValueTask DisposeAsync()
         {
             return _context.DisposeAsync();
 
+        }
+
+        public async Task<Post?> GetPostById(int postId)
+        {
+            return await _context.Post.Where(p => p.Id == postId).FirstOrDefaultAsync();
         }
     }
 }

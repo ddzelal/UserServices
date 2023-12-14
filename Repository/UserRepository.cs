@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using UserRepository.Data;
 using UserRepository.Interfaces;
@@ -33,6 +29,11 @@ namespace UserRepository.Repository
         public async Task<User?> GetByEmail(string email)
         {
             return await _context.User.FirstOrDefaultAsync(u => u.Email == email);
+        }
+
+        public async Task<User?> GetUserById(int userId)
+        {
+            return await _context.User.Where(u => u.Id == userId).FirstOrDefaultAsync();
         }
 
         public async Task Update(User user)

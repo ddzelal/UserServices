@@ -51,6 +51,11 @@ namespace UserRepository.Middlewares
                     errorMessages = noUserFoundException?.Messages ?? new List<string>();
                     return context.Response.WriteAsync(JsonSerializer.Serialize(new { errors = errorMessages }));
 
+                case NotFoundRequestException notFoundRequestException:
+                    context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                    errorMessages = notFoundRequestException?.Messages ?? new List<string>();
+                    return context.Response.WriteAsync(JsonSerializer.Serialize(new { errors = errorMessages }));
+
                 default:
                     _logger.LogError(ex, ex.ToString());
                     context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;

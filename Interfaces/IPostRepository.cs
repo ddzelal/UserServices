@@ -9,6 +9,9 @@ namespace UserRepository.Interfaces
     public interface IPostRepository
     {
         public Task Add(Post post);
+        public Task<Post?> GetPostById(int postId);
+
+        public Task DeletePost(int postId, int authorId);
 
     }
 }

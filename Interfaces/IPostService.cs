@@ -9,6 +9,6 @@ namespace UserRepository.Interfaces
     public interface IPostService
     {
         public Task CreatePost(PostCommand command);
-
+        public Task DelatePost(int postId);
     }
 }
