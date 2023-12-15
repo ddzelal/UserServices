@@ -10,5 +10,6 @@ namespace UserRepository.Interfaces
         public Task ResetVerificationCode(string email);
         public Task ForgotPasswordSendCode(string email);
         public Task ResetPassword(string email, string password, string confirmPassword, string resetCode);
+        public Task<GetMeResault> GetUserById();
     }
 }

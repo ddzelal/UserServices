@@ -16,8 +16,6 @@ builder.Services.AddControllers();
 builder.Services.AddScoped();
 builder.Services.AddJwt(builder.Configuration);
 builder.Services.AddConfiguration(builder.Configuration);
-builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, SwaggerGetOptionConfiguration>();
-builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 
 

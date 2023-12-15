@@ -3,6 +3,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using UserRepository.Helper;
 using UserRepository.Interfaces;
 using UserRepository.Repository;
@@ -24,6 +25,8 @@ namespace UserRepository
             services.AddScoped<ICodeGenerator, CodeGenerator>();
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped(provider => provider.GetRequiredService<IHttpContextAccessor>().HttpContext.User);
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 
             return services;
         }
@@ -42,6 +45,7 @@ namespace UserRepository
             var jwtSettingsData = new JwtSettings();
             configuration.Bind(JwtSettings.SectionName, jwtSettingsData);
             services.AddSingleton(Options.Create(jwtSettingsData));
+            services.AddTransient<IConfigureOptions<SwaggerGenOptions>, SwaggerGetOptionConfiguration>();
             services.AddAuthentication(defaultScheme: JwtBearerDefaults.AuthenticationScheme)
                         .AddJwtBearer(options => options.TokenValidationParameters = new TokenValidationParameters
                         {

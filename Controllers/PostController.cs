@@ -9,6 +9,7 @@ using UserRepository.Interfaces;
 
 namespace UserRepository.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class PostController : ControllerBase
@@ -19,7 +20,6 @@ namespace UserRepository.Controllers
             _postService = postService;
 
         }
-        [Authorize]
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] PostCommand command)
         {
@@ -29,7 +29,6 @@ namespace UserRepository.Controllers
             return Ok("Successfully created post!");
         }
 
-        [Authorize]
         [HttpDelete("delete/{postId}")]
         public async Task<IActionResult> Delete(int postId)
         {

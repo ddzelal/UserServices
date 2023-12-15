@@ -73,11 +73,13 @@ namespace UserRepository.Controllers
         }
 
         [Authorize]
-        [HttpGet("getMe")]
-        public void GetMe()
+        [HttpGet("me")]
+        public async Task<IActionResult> GetMe()
         {
+            GetMeResault result = await _authenticationService.GetUserById();
 
-            Ok("Successfully reset password!");
+            return Ok(result);
+
         }
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using UserRepository.Dto;
 using UserRepository.Errors;
@@ -16,9 +17,12 @@ namespace UserRepository.Services
         private readonly ICodeGenerator _codeGenerator;
         private readonly IEmailService _emailService;
         private readonly IJwtTokenGenerator _jwtTokenGenerator;
-        public AuthenticationService(IUserRepository userRepository, IPasswordHasher passwordHasher, ICodeGenerator codeGenerator, IEmailService emailService, IJwtTokenGenerator jwtTokenGenerator)
+        private readonly ClaimsPrincipal _claims;
+        private readonly IGetClaim _getClaim;
+        public AuthenticationService(IUserRepository userRepository, IPasswordHasher passwordHasher, ICodeGenerator codeGenerator, IEmailService emailService, IJwtTokenGenerator jwtTokenGenerator, IGetClaim getClaim, ClaimsPrincipal claims)
         {
-
+            _getClaim = getClaim;
+            _claims = claims;
             _jwtTokenGenerator = jwtTokenGenerator;
             _emailService = emailService;
             _codeGenerator = codeGenerator;
@@ -43,6 +47,15 @@ namespace UserRepository.Services
 
             await _userRepository.Update(user);
 
+        }
+
+        public async Task<GetMeResault> GetUserById()
+        {
+            var userId = _getClaim.GetUserIdFromClaims(_claims);
+
+            var user = await _userRepository.GetUserById(userId) ?? throw new NoUserFoundException("User not found!");
+
+            return new GetMeResault(user.Id, user.FirstName, user.LastName, user.Email);
         }
 
         public async Task<AuthenticationResult> Login(LoginQuery query)
