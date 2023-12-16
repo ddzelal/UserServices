@@ -1,7 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using UserRepository.Data;
+using UserRepository.Dto;
 using UserRepository.Models;
 
 namespace UserRepository.Interfaces
@@ -12,6 +10,10 @@ namespace UserRepository.Interfaces
         public Task<Post?> GetPostById(int postId);
 
         public Task DeletePost(int postId, int authorId);
+
+        // public Task<IEnumerable<Post>> GetPosts(int page, int pageSize, SortOrder sortOrder);
+
+        public Task<List<PostsResponse>> GetPosts(GetPostsQuery getPostsQuery);
 
     }
 }

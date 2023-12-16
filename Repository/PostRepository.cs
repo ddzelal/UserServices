@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using UserRepository.Data;
+using UserRepository.Dto;
 using UserRepository.Interfaces;
 using UserRepository.Models;
 
@@ -31,15 +32,16 @@ namespace UserRepository.Repository
             await _context.SaveChangesAsync();
         }
 
-        public ValueTask DisposeAsync()
-        {
-            return _context.DisposeAsync();
+        public ValueTask DisposeAsync() => _context.DisposeAsync();
 
-        }
 
-        public async Task<Post?> GetPostById(int postId)
+        public async Task<Post?> GetPostById(int postId) => await _context.Post.Where(p => p.Id == postId).FirstOrDefaultAsync();
+
+
+
+        public Task<List<PostsResponse>> GetPosts(GetPostsQuery getPostsQuery)
         {
-            return await _context.Post.Where(p => p.Id == postId).FirstOrDefaultAsync();
+            throw new NotImplementedException();
         }
     }
 }

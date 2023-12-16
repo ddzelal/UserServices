@@ -44,5 +44,11 @@ namespace UserRepository.Services
 
             await _postRepository.DeletePost(post.Id, authorId);
         }
+
+        // public Task<IEnumerable<Post>> GetPosts(int page, int pageSize, SortOrder sortOrder)
+        // {
+        //     return _postRepository.GetPosts(page, pageSize, sortOrder);
+        // }
+
     }
 }

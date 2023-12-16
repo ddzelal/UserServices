@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UserRepository.Dto;
 using UserRepository.Interfaces;
+using UserRepository.Models;
 
 namespace UserRepository.Controllers
 {
@@ -35,6 +36,14 @@ namespace UserRepository.Controllers
             await _postService.DelatePost(postId);
 
             return Ok("Successfully deleted post!");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetPosts(int page, int pageSize, SortOrder sortOrder)
+        {
+            var result = await _postService.GetPosts(page, pageSize, sortOrder);
+            return Ok(result);
+
         }
 
 
