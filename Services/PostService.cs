@@ -45,7 +45,7 @@ namespace UserRepository.Services
             await _postRepository.DeletePost(post.Id, authorId);
         }
 
-        public async Task<List<PostsResponse>> GetPosts(GetPostsQuery request)
+        public async Task<PageList<PostsResponse>> GetPosts(GetPostsQuery request)
         {
             return await _postRepository.GetPosts(request);
 

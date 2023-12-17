@@ -1,9 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 using UserRepository.Dto;
-using UserRepository.Models;
 
 namespace UserRepository.Interfaces
 {
@@ -11,7 +7,7 @@ namespace UserRepository.Interfaces
     {
         public Task CreatePost(PostCommand command);
         public Task DelatePost(int postId);
-        Task<List<PostsResponse>> GetPosts(GetPostsQuery request);
+        Task<PageList<PostsResponse>> GetPosts(GetPostsQuery request);
 
 
     }
