@@ -11,8 +11,8 @@ namespace UserRepository.Interfaces
     {
         public Task CreatePost(PostCommand command);
         public Task DelatePost(int postId);
+        Task<List<PostsResponse>> GetPosts(GetPostsQuery request);
 
-        // public Task<IEnumerable<Post>> GetPosts(int page, int pageSize, SortOrder sortOrder);
 
     }
 }

@@ -39,11 +39,10 @@ namespace UserRepository.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetPosts(int page, int pageSize, SortOrder sortOrder)
+        public async Task<IActionResult> GetPosts([FromQuery] GetPostsQuery request)
         {
-            var result = await _postService.GetPosts(page, pageSize, sortOrder);
-            return Ok(result);
-
+            var posts = await _postService.GetPosts(request);
+            return Ok(posts);
         }
 
 

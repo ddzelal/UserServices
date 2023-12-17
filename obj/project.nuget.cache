@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "obzIJnus0CNeOvKPpSHp9zpLNLtejiCDSeAa2nfoLAUWhxwSiJ0mXYt32arbdnfmUTuzZsKU7PQZpDcMBpD+wA==",
+  "dgSpecHash": "0UNbzqgQ7zbmCSJrVVbZZFNrQHp75sBfeRS2+aOodr/PvSdCsnMTPJZ0zkhfDEIRSg90IIeHUyp57H8s2F8GUQ==",
   "success": true,
   "projectFilePath": "/home/dzelal/Desktop/dzelal-public/c-sharp-practice/UserRepository/UserRepository/UserRepository.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,8 @@
     "/home/dzelal/.nuget/packages/bouncycastle.cryptography/2.2.1/bouncycastle.cryptography.2.2.1.nupkg.sha512",
     "/home/dzelal/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/home/dzelal/.nuget/packages/mailkit/4.3.0/mailkit.4.3.0.nupkg.sha512",
+    "/home/dzelal/.nuget/packages/mediatr/12.2.0/mediatr.12.2.0.nupkg.sha512",
+    "/home/dzelal/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
     "/home/dzelal/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/7.0.14/microsoft.aspnetcore.authentication.jwtbearer.7.0.14.nupkg.sha512",
     "/home/dzelal/.nuget/packages/microsoft.aspnetcore.openapi/7.0.14/microsoft.aspnetcore.openapi.7.0.14.nupkg.sha512",
     "/home/dzelal/.nuget/packages/microsoft.bcl.asyncinterfaces/1.1.1/microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
@@ -26,7 +28,7 @@
     "/home/dzelal/.nuget/packages/microsoft.extensions.caching.memory/7.0.0/microsoft.extensions.caching.memory.7.0.0.nupkg.sha512",
     "/home/dzelal/.nuget/packages/microsoft.extensions.configuration.abstractions/7.0.0/microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",
     "/home/dzelal/.nuget/packages/microsoft.extensions.dependencyinjection/7.0.0/microsoft.extensions.dependencyinjection.7.0.0.nupkg.sha512",
-    "/home/dzelal/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/7.0.0/microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
+    "/home/dzelal/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.0/microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
     "/home/dzelal/.nuget/packages/microsoft.extensions.dependencymodel/7.0.0/microsoft.extensions.dependencymodel.7.0.0.nupkg.sha512",
     "/home/dzelal/.nuget/packages/microsoft.extensions.logging/7.0.0/microsoft.extensions.logging.7.0.0.nupkg.sha512",
     "/home/dzelal/.nuget/packages/microsoft.extensions.logging.abstractions/7.0.0/microsoft.extensions.logging.abstractions.7.0.0.nupkg.sha512",

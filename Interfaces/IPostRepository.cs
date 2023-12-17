@@ -13,7 +13,7 @@ namespace UserRepository.Interfaces
 
         // public Task<IEnumerable<Post>> GetPosts(int page, int pageSize, SortOrder sortOrder);
 
-        public Task<List<PostsResponse>> GetPosts(GetPostsQuery getPostsQuery);
+        public Task<PageList<PostsResponse>> GetPosts(GetPostsQuery getPostsQuery);
 
     }
 }

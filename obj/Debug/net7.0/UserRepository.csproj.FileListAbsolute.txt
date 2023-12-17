@@ -80,3 +80,6 @@
 /home/dzelal/Desktop/dzelal-public/c-sharp-practice/UserRepository/UserRepository/bin/Debug/net7.0/System.Security.Cryptography.Pkcs.dll
 /home/dzelal/Desktop/dzelal-public/c-sharp-practice/UserRepository/UserRepository/bin/Debug/net7.0/runtimes/win/lib/net7.0/System.Security.Cryptography.Pkcs.dll
 /home/dzelal/Desktop/dzelal-public/c-sharp-practice/UserRepository/UserRepository/bin/Debug/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/home/dzelal/Desktop/dzelal-public/c-sharp-practice/UserRepository/UserRepository/bin/Debug/net7.0/MediatR.dll
+/home/dzelal/Desktop/dzelal-public/c-sharp-practice/UserRepository/UserRepository/bin/Debug/net7.0/MediatR.Contracts.dll
+/home/dzelal/Desktop/dzelal-public/c-sharp-practice/UserRepository/UserRepository/bin/Debug/net7.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll

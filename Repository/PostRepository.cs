@@ -39,9 +39,21 @@ namespace UserRepository.Repository
 
 
 
-        public Task<List<PostsResponse>> GetPosts(GetPostsQuery getPostsQuery)
+        public async Task<PageList<PostsResponse>> GetPosts(GetPostsQuery request)
         {
-            throw new NotImplementedException();
+            IQueryable<Post> posts = _context.Post;
+            if (!string.IsNullOrWhiteSpace(request.SearchTerm))
+            {
+                posts = posts.Where(p => p.Title.Contains(request.SearchTerm));
+            }
+
+
+            var postsResponses = posts.Select(p => new PostsResponse(p.Id, p.Content, p.Title));
+            var resultPageList = await PageList<PostsResponse>.CreateAsync(postsResponses, (int)request.Page, (int)request.PageSize);
+
+
+            return resultPageList;
+
         }
     }
 }
